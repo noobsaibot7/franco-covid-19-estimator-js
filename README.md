@@ -2,6 +2,28 @@
 
 > Build an overly simplified COVID-19 infection impact estimator
 
+
+{
+region: {
+name: "Africa",
+avgAge: 19.7,
+avgDailyIncomeInUSD: 5,
+avgDailyIncomePopulation: 0.71
+},
+periodType: "days",
+timeToElapse: 58,
+reportedCases: 674,
+population: 66622705,
+totalHospitalBeds: 1380614
+}
+
+
+{
+data: {}, // the input data you got
+impact: {}, // your best case estimation
+severeImpact: {} // your severe case estimation
+}
+
 This is an eligibility assessment for the 2020 [#BuildforSDG](https://buildforsdg.andela.com/) program
 
 The assessment empowers me to **attempt** helping society and leaders prepare for the **real big problem** of COVID-19, which is **its impact on lives, health systems, supply chains, and the economy**: 

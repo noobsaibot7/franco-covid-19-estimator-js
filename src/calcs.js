@@ -27,7 +27,7 @@ export function predictInfectionsByRequestedTime({
   severeImpact
 }) {
   const numOfDays = durationConverter(data);
-  const numOfInfected = 2 ** Math.floor(numOfDays / 3);
+  const numOfInfected = 2 ** Math.trunc(numOfDays / 3);
 
   impact.infectionsByRequestedTime = Number(
     impact.currentlyInfected * numOfInfected

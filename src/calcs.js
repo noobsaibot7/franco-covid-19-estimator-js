@@ -1,4 +1,4 @@
-function durationConverter({ periodType, timeToElapse }) {
+function durationConverter({ periodType, timeToElapse } = {}) {
   switch (periodType) {
     case 'days':
       return Number(timeToElapse);
@@ -12,8 +12,8 @@ function durationConverter({ periodType, timeToElapse }) {
 }
 
 export function predictCurrentlyInfected(data) {
-  let impact;
-  let severeImpact;
+  const impact = {};
+  const severeImpact = {};
 
   impact.currentlyInfected = Number(data.reportedCases * 10);
   severeImpact.currentlyInfected = Number(data.reportedCases * 50);
@@ -21,7 +21,11 @@ export function predictCurrentlyInfected(data) {
   return { data, impact, severeImpact };
 }
 
-export function predictInfectionsByRequestedTime({ data, impact, severeImpact }) {
+export function predictInfectionsByRequestedTime({
+  data,
+  impact,
+  severeImpact
+}) {
   const numOfDays = durationConverter(data);
   const numOfInfected = 2 ** Math.floor(numOfDays / 3);
 
@@ -59,7 +63,11 @@ export function predictBedsByRequestedTime({ data, impact, severeImpact }) {
   return { data, impact, severeImpact };
 }
 
-export function predictCasesForICUByRequestedTime({ data, impact, severeImpact }) {
+export function predictCasesForICUByRequestedTime({
+  data,
+  impact,
+  severeImpact
+}) {
   impact.casesForICUByRequestedTime = Math.floor(
     0.05 * impact.infectionsByRequestedTime
   );
@@ -70,7 +78,11 @@ export function predictCasesForICUByRequestedTime({ data, impact, severeImpact }
   return { data, impact, severeImpact };
 }
 
-export function predictInfectedRequestedVentilators({ data, impact, severeImpact }) {
+export function predictInfectedRequestedVentilators({
+  data,
+  impact,
+  severeImpact
+}) {
   impact.casesForVentilatorsByRequestedTime = Math.floor(
     0.02 * impact.infectionsByRequestedTime
   );

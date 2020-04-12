@@ -15,8 +15,8 @@ export function predictCurrentlyInfected(data) {
   const impact = {};
   const severeImpact = {};
 
-  impact.currentlyInfected = Number(data.reportedCases * 10);
-  severeImpact.currentlyInfected = Number(data.reportedCases * 50);
+  impact.currentlyInfected = Math.trunc(data.reportedCases * 10);
+  severeImpact.currentlyInfected = Math.trunc(data.reportedCases * 50);
 
   return { data, impact, severeImpact };
 }
@@ -29,10 +29,10 @@ export function predictInfectionsByRequestedTime({
   const numOfDays = durationConverter(data);
   const numOfInfected = 2 ** Math.trunc(numOfDays / 3);
 
-  impact.infectionsByRequestedTime = Number(
+  impact.infectionsByRequestedTime = Math.trunc(
     impact.currentlyInfected * numOfInfected
   );
-  severeImpact.infectionsByRequestedTime = Number(
+  severeImpact.infectionsByRequestedTime = Math.trunc(
     severeImpact.currentlyInfected * numOfInfected
   );
 
@@ -61,10 +61,10 @@ export function predictBedsByRequestedTime({
 } = {}) {
   const remainingBeds = Math.trunc(data.totalHospitalBeds * 0.35);
 
-  impact.hospitalBedsByRequestedTime = Number(
+  impact.hospitalBedsByRequestedTime = Math.trunc(
     remainingBeds - impact.severeCasesByRequestedTime
   );
-  severeImpact.hospitalBedsByRequestedTime = Number(
+  severeImpact.hospitalBedsByRequestedTime = Math.trunc(
     remainingBeds - severeImpact.severeCasesByRequestedTime
   );
 

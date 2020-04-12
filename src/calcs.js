@@ -1,11 +1,11 @@
 function durationConverter({ periodType, timeToElapse } = {}) {
   switch (periodType) {
     case 'days':
-      return Number(timeToElapse);
+      return Math.trunc(timeToElapse);
     case 'weeks':
-      return Number(timeToElapse * 7);
+      return Math.trunc(timeToElapse * 7);
     case 'months':
-      return Number(timeToElapse * 30);
+      return Math.trunc(timeToElapse * 30);
     default:
       throw Error("periodType must be either 'days', 'weeks' or 'months'.");
   }

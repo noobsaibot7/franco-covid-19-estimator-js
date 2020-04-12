@@ -15,8 +15,8 @@ export function predictCurrentlyInfected(data) {
   const impact = {};
   const severeImpact = {};
 
-  impact.currentlyInfected = Math.trunc(data.reportedCases * 10);
-  severeImpact.currentlyInfected = Math.trunc(data.reportedCases * 50);
+  impact.currentlyInfected = data.reportedCases * 10;
+  severeImpact.currentlyInfected = data.reportedCases * 50;
 
   return { data, impact, severeImpact };
 }
@@ -29,12 +29,9 @@ export function predictInfectionsByRequestedTime({
   const numOfDays = durationConverter(data);
   const numOfInfected = 2 ** Math.trunc(numOfDays / 3);
 
-  impact.infectionsByRequestedTime = Math.trunc(
-    impact.currentlyInfected * numOfInfected
-  );
-  severeImpact.infectionsByRequestedTime = Math.trunc(
-    severeImpact.currentlyInfected * numOfInfected
-  );
+  impact.infectionsByRequestedTime = impact.currentlyInfected * numOfInfected;
+  severeImpact.infectionsByRequestedTime =
+    severeImpact.currentlyInfected * numOfInfected;
 
   return { data, impact, severeImpact };
 }
@@ -44,12 +41,9 @@ export function predictCasesByRequestedTime({
   impact,
   severeImpact
 } = {}) {
-  impact.severeCasesByRequestedTime = Math.trunc(
-    0.15 * impact.infectionsByRequestedTime
-  );
-  severeImpact.severeCasesByRequestedTime = Math.trunc(
-    0.15 * severeImpact.infectionsByRequestedTime
-  );
+  impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
+  severeImpact.severeCasesByRequestedTime =
+    0.15 * severeImpact.infectionsByRequestedTime;
 
   return { data, impact, severeImpact };
 }
@@ -59,7 +53,7 @@ export function predictBedsByRequestedTime({
   impact,
   severeImpact
 } = {}) {
-  const remainingBeds = Math.trunc(data.totalHospitalBeds * 0.35);
+  const remainingBeds = data.totalHospitalBeds * 0.35;
 
   impact.hospitalBedsByRequestedTime = Math.trunc(
     remainingBeds - impact.severeCasesByRequestedTime
@@ -105,9 +99,8 @@ export function predictDollarsInFlight({ data, impact, severeImpact } = {}) {
   const numOfDays = durationConverter(data);
   const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
   function losses(val) {
-    const result = Math.trunc(
-      (avgDailyIncomePopulation * avgDailyIncomeInUSD) / numOfDays
-    );
+    const result = (avgDailyIncomePopulation * avgDailyIncomeInUSD) / numOfDays;
+
     return Math.trunc(val * result);
   }
 

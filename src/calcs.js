@@ -30,8 +30,7 @@ export function predictInfectionsByRequestedTime({
   const numOfInfected = 2 ** Math.trunc(numOfDays / 3);
 
   impact.infectionsByRequestedTime = impact.currentlyInfected * numOfInfected;
-  severeImpact.infectionsByRequestedTime =
-    severeImpact.currentlyInfected * numOfInfected;
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * numOfInfected;
 
   return { data, impact, severeImpact };
 }
@@ -42,8 +41,7 @@ export function predictCasesByRequestedTime({
   severeImpact
 } = {}) {
   impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
-  severeImpact.severeCasesByRequestedTime =
-    0.15 * severeImpact.infectionsByRequestedTime;
+  severeImpact.severeCasesByRequestedTime = 0.15 * severeImpact.infectionsByRequestedTime;
 
   return { data, impact, severeImpact };
 }

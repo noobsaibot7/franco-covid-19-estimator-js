@@ -67,7 +67,7 @@ export function predictCasesForICUByRequestedTime({
   data,
   impact,
   severeImpact
-} = {}) {
+}) {
   impact.casesForICUByRequestedTime = Math.trunc(
     0.05 * impact.infectionsByRequestedTime
   );

@@ -59,7 +59,7 @@ export function predictBedsByRequestedTime({
   impact,
   severeImpact
 } = {}) {
-  const remainingBeds = Math.floor(data.totalHospitalBeds * 0.35);
+  const remainingBeds = Math.trunc(data.totalHospitalBeds * 0.35);
 
   impact.hospitalBedsByRequestedTime = Number(
     remainingBeds - impact.severeCasesByRequestedTime
@@ -91,10 +91,10 @@ export function predictInfectedRequestedVentilators({
   impact,
   severeImpact
 } = {}) {
-  impact.casesForVentilatorsByRequestedTime = Math.floor(
+  impact.casesForVentilatorsByRequestedTime = Math.trunc(
     0.02 * impact.infectionsByRequestedTime
   );
-  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
+  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
     0.02 * severeImpact.infectionsByRequestedTime
   );
 
@@ -105,10 +105,10 @@ export function predictDollarsInFlight({ data, impact, severeImpact } = {}) {
   const numOfDays = durationConverter(data);
   const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
   function losses(val) {
-    const result = Math.floor(
+    const result = Math.trunc(
       (avgDailyIncomePopulation * avgDailyIncomeInUSD) / numOfDays
     );
-    return Math.floor(val * result);
+    return Math.trunc(val * result);
   }
 
   impact.dollarsInFlight = losses(impact.infectionsByRequestedTime);

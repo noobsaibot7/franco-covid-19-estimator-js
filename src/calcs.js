@@ -44,10 +44,10 @@ export function predictCasesByRequestedTime({
   impact,
   severeImpact
 } = {}) {
-  impact.severeCasesByRequestedTime = Math.floor(
+  impact.severeCasesByRequestedTime = Math.trunc(
     0.15 * impact.infectionsByRequestedTime
   );
-  severeImpact.severeCasesByRequestedTime = Math.floor(
+  severeImpact.severeCasesByRequestedTime = Math.trunc(
     0.15 * severeImpact.infectionsByRequestedTime
   );
 
@@ -61,10 +61,10 @@ export function predictBedsByRequestedTime({
 } = {}) {
   const remainingBeds = Math.floor(data.totalHospitalBeds * 0.35);
 
-  impact.hospitalBedsByRequestedTime = Math.floor(
+  impact.hospitalBedsByRequestedTime = Number(
     remainingBeds - impact.severeCasesByRequestedTime
   );
-  severeImpact.hospitalBedsByRequestedTime = Math.floor(
+  severeImpact.hospitalBedsByRequestedTime = Number(
     remainingBeds - severeImpact.severeCasesByRequestedTime
   );
 
@@ -76,10 +76,10 @@ export function predictCasesForICUByRequestedTime({
   impact,
   severeImpact
 } = {}) {
-  impact.casesForICUByRequestedTime = Math.floor(
+  impact.casesForICUByRequestedTime = Math.trunc(
     0.05 * impact.infectionsByRequestedTime
   );
-  severeImpact.casesForICUByRequestedTime = Math.floor(
+  severeImpact.casesForICUByRequestedTime = Math.trunc(
     0.05 * severeImpact.infectionsByRequestedTime
   );
 

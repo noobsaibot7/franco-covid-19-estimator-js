@@ -39,7 +39,11 @@ export function predictInfectionsByRequestedTime({
   return { data, impact, severeImpact };
 }
 
-export function predictCasesByRequestedTime({ data, impact, severeImpact }) {
+export function predictCasesByRequestedTime({
+  data,
+  impact,
+  severeImpact
+} = {}) {
   impact.severeCasesByRequestedTime = Number(
     0.15 * impact.infectionsByRequestedTime
   );
@@ -50,7 +54,11 @@ export function predictCasesByRequestedTime({ data, impact, severeImpact }) {
   return { data, impact, severeImpact };
 }
 
-export function predictBedsByRequestedTime({ data, impact, severeImpact }) {
+export function predictBedsByRequestedTime({
+  data,
+  impact,
+  severeImpact
+} = {}) {
   const remainingBeds = Math.floor(data.totalHospitalBeds * 0.35);
 
   impact.hospitalBedsByRequestedTime = Number(
@@ -67,7 +75,7 @@ export function predictCasesForICUByRequestedTime({
   data,
   impact,
   severeImpact
-}) {
+} = {}) {
   impact.casesForICUByRequestedTime = Math.floor(
     0.05 * impact.infectionsByRequestedTime
   );
@@ -82,7 +90,7 @@ export function predictInfectedRequestedVentilators({
   data,
   impact,
   severeImpact
-}) {
+} = {}) {
   impact.casesForVentilatorsByRequestedTime = Math.floor(
     0.02 * impact.infectionsByRequestedTime
   );
@@ -93,7 +101,7 @@ export function predictInfectedRequestedVentilators({
   return { data, impact, severeImpact };
 }
 
-export function predictDollarsInFlight({ data, impact, severeImpact }) {
+export function predictDollarsInFlight({ data, impact, severeImpact } = {}) {
   const numOfDays = durationConverter(data);
   const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
   function losses(val) {

@@ -1,4 +1,4 @@
-function durationConverter({ periodType, timeToElapse } = {}) {
+function durationConverter({ periodType, timeToElapse }) {
   switch (periodType) {
     case 'days':
       return timeToElapse;
@@ -39,7 +39,7 @@ export function predictCasesByRequestedTime({
   data,
   impact,
   severeImpact
-} = {}) {
+}) {
   impact.severeCasesByRequestedTime = 0.15 * impact.infectionsByRequestedTime;
   severeImpact.severeCasesByRequestedTime = 0.15 * severeImpact.infectionsByRequestedTime;
 
@@ -50,7 +50,7 @@ export function predictBedsByRequestedTime({
   data,
   impact,
   severeImpact
-} = {}) {
+}) {
   const remainingBeds = data.totalHospitalBeds * 0.35;
 
   impact.hospitalBedsByRequestedTime = Math.trunc(
@@ -82,7 +82,7 @@ export function predictInfectedRequestedVentilators({
   data,
   impact,
   severeImpact
-} = {}) {
+}) {
   impact.casesForVentilatorsByRequestedTime = Math.floor(0.02 * impact.infectionsByRequestedTime);
   severeImpact.casesForVentilatorsByRequestedTime = Math.floor(
     0.02 * severeImpact.infectionsByRequestedTime
@@ -91,7 +91,7 @@ export function predictInfectedRequestedVentilators({
   return { data, impact, severeImpact };
 }
 
-export function predictDollarsInFlight({ data, impact, severeImpact } = {}) {
+export function predictDollarsInFlight({ data, impact, severeImpact }) {
   const numOfDays = durationConverter(data);
   const { avgDailyIncomeInUSD, avgDailyIncomePopulation } = data.region;
   function losses(val) {

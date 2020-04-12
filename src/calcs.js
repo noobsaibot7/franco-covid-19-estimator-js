@@ -83,12 +83,8 @@ export function predictInfectedRequestedVentilators({
   impact,
   severeImpact
 } = {}) {
-  impact.casesForVentilatorsByRequestedTime = Math.trunc(
-    0.02 * impact.infectionsByRequestedTime
-  );
-  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(
-    0.02 * severeImpact.infectionsByRequestedTime
-  );
+  impact.casesForVentilatorsByRequestedTime = 0.02 * impact.infectionsByRequestedTime;
+  severeImpact.casesForVentilatorsByRequestedTime = 0.02 * severeImpact.infectionsByRequestedTime;
 
   return { data, impact, severeImpact };
 }
